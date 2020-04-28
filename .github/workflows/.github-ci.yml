@@ -44,3 +44,18 @@ jobs:
         run: bundle install
       - name: run rubocop
         run: bundle exec rubocop
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: general
+          SLACK_COLOR: "#3278BD"
+          SLACK_ICON: http://blog-imgs-46.fc2.com/m/i/n/minamonblog/20100722003246074.jpg
+          SLACK_MESSAGE: "CI Result :bear:"
+          SLACK_TITLE: result
+          SLACK_USERNAME: notify-github-actions
